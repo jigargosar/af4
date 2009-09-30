@@ -61,6 +61,9 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
 
     respond_to do |format|
+      if(!params[:reschedule].nil?)
+        @item.clone.save
+      end
       if @item.update_attributes(params[:item])
         flash[:notice] = 'Item was successfully updated.'
         format.html { redirect_to(items_path) }

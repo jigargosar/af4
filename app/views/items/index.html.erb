@@ -11,12 +11,13 @@
       <div style="float:left;">
         <% if !item.completed %>
           <% form_for(item, :html=>{:style => 'display:inline'}) do |f| %>
-            <%= f.hidden_field :completed, :value=>(!item.completed).to_s %>
+            <%= f.hidden_field :completed, :value=>"true" %>
             <%= f.submit 'done' %>
           <% end %>
           <% form_for(item, :html=>{:style => 'display:inline'}) do |f| %>
-            <%= f.hidden_field :completed, :value=>(!item.completed).to_s %>
-            <%= f.submit 'recurr' %>
+            <%= f.hidden_field :completed, :value=>"true" %>
+            <%= hidden_field :reschedule, :value=>"true" %>
+            <%= f.submit 'reschedule' %>
           <% end %>
         <% end %>
       </div>
