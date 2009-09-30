@@ -1,0 +1,13 @@
+<p>
+  <b>Content:</b>
+  <%=h @item.content %>
+</p>
+
+<p>
+  <b>Completed:</b>
+  <%=h @item.completed %>
+</p>
+
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>

@@ -1,0 +1,14 @@
+<h1>New item</h1>
+
+<% form_for(@item) do |f| %>
+  <%= f.error_messages %>
+  <%= f.hidden_field :completed, :value=>"false"%>
+  <p>    
+    <%= f.text_field :content, :focus=>true %>
+    <%= focus "item_content"%>
+  </p>  
+  <p>
+    <%= f.submit 'Create' %> | <%= link_to 'cancel', items_path %> 
+  </p>
+<% end %>
+

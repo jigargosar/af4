@@ -1,0 +1,42 @@
+<%= link_to_function "hide done", "hide_done()" %> |
+<%= link_to_function "show done", "show_done()" %>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @items.each do |item| %>
+    <tr>
+      <td>
+        <div class="<%= item.completed ? "done hidden":"" %>">
+          <%= h item.content %>
+        </div>
+      </td>
+      <td>
+        <% if !item.completed %>
+          <% form_for(item) do |f| %>
+            <%= f.hidden_field :completed, :value=>(!item.completed).to_s %>
+            <%= f.submit item.completed ? 'undo' : 'done' %>
+          <% end %>
+        <% end %>
+      </td>
+      <!--<td><%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %></td>-->
+    </tr>
+  <% end %>
+</table>
+
+<br/>
+
+<% form_for(@item) do |f| %>
+  <%= f.error_messages %>
+  <%= f.hidden_field :completed, :value=>"false"%>
+  <p>
+    <%= f.text_field :content, :focus=>true %>
+    <%= focus "item_content"%>
+    <%= f.submit 'add' %>
+  </p>
+  
+<% end %>
+
