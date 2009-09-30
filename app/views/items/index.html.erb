@@ -1,7 +1,7 @@
 <%= link_to_function "hide done", "hide_done()" %> |
 <%= link_to_function "show done", "show_done()" %>
 
-<ul style="margin:0; padding:0; width:300px;">
+<ul style="margin:0; padding:0; width:400px;">
   <% @items.each do |item| %>
     <li class="<%= item.completed ? "done hidden":"" %>" style="list-style:none">
       <div style="float:left;width:200px; border-bottom:1px #f0f0f0 solid">
@@ -12,7 +12,11 @@
         <% if !item.completed %>
           <% form_for(item, :html=>{:style => 'display:inline'}) do |f| %>
             <%= f.hidden_field :completed, :value=>(!item.completed).to_s %>
-            <%= f.submit item.completed ? 'undo' : 'done' %>
+            <%= f.submit 'done' %>
+          <% end %>
+          <% form_for(item, :html=>{:style => 'display:inline'}) do |f| %>
+            <%= f.hidden_field :completed, :value=>(!item.completed).to_s %>
+            <%= f.submit 'recurr' %>
           <% end %>
         <% end %>
       </div>
