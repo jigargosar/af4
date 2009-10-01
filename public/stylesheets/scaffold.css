@@ -53,10 +53,15 @@ a:hover { color: #fff; background-color:#000; }
 }
 
 /*app specific styles*/
-.done{
+.done .done_content{
   text-decoration:line-through;
 }
 
-.hidden{
-  display:none;
+.marker_toggle_form{
+  display:inline;
+}
+
+
+.done_buttons{
+  display:inline;
 }

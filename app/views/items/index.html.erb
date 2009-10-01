@@ -1,29 +1,37 @@
-<%= link_to_function "hide done", "hide_done()" %> |
-<%= link_to_function "show done", "show_done()" %>
+<%= link_to_function "toggle done", "toggle_done()" %> |
+<%= link_to_function "toggle marker", "toggle_marker_buttons()" %>
 
-<ul style="margin:0; padding:0; width:400px;">
+<ul style="margin:0; padding:0; width:500px;">
   <% @items.each do |item| %>
-    <li class="<%= item.completed ? "done hidden":"" %>" style="list-style:none">
-      <div style="float:left;width:200px; border-bottom:1px #f0f0f0 solid">
+    <li class="<%= item.completed ? "done":"" %>"
+        style="list-style:none; <%= item.completed ? "display:none":"" %>">
+
+      <div class="done_content" style="float:left;width:200px; border-bottom:1px #f0f0f0 solid">
         <%= h item.content %>
       </div>
 
       <div style="float:left;">
         <% if !item.completed %>
-          <% form_for(item, :html=>{:style => 'display:inline'}) do |f| %>
-            <%= f.hidden_field :completed, :value=>"true" %>
-            <%= f.submit 'done' %>
-          <% end %>
-          <% form_for(item, :html=>{:style => 'display:inline'}) do |f| %>
-            <%= f.hidden_field :completed, :value=>"true" %>
-            <%= hidden_field :reschedule, :value=>"true" %>
-            <%= f.submit 'reschedule' %>
-          <% end %>
+          <div class="done_buttons">
+            <% form_for(item, :html=>{:style => 'display:inline'}) do |f| %>
+              <%= f.hidden_field :completed, :value=>"true" %>
+              <%= f.submit 'done' %>
+            <% end %>
+            <% form_for(item, :html=>{:style => 'display:inline'}) do |f| %>
+              <%= f.hidden_field :completed, :value=>"true" %>
+              <%= hidden_field :reschedule, :value=>"true" %>
+              <%= f.submit 'reschedule' %>
+            <% end %>
+          </div>
+        <% end %>
+        <% form_for(item, :html=>{:class=>"marker_toggle_form", :style=>"display:none"}) do |f| %>
+          <%= f.hidden_field :line_marker, :value=>(!item.line_marker).to_s %>
+          <%= f.submit item.line_marker ? 'remove marker':'add marker' %>
         <% end %>
       </div>
 
       <div style="clear:both;"></div>
-      <% if item.id == 30 %>
+      <% if item.line_marker %>
         <div style="border-bottom: 1px #98AFC7 solid"></div>
       <% end %>
 

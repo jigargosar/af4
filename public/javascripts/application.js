@@ -1,14 +1,17 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
-function hide_done() {
+function toggle_done() {
   $$(".done").each(function(e) {
-    e.addClassName("hidden")
+    e.toggle()
   })
 }
-function show_done() {
-  $$(".done").each(function(e) {
-    e.removeClassName("hidden")
-  })
 
+function toggle_marker_buttons(){
+  $$(".done_buttons").each(function(e) {
+    e.toggle()
+  })
+  $$(".marker_toggle_form").each(function(e) {
+    e.toggle()
+  })
 }
