@@ -1,5 +1,5 @@
-<%= link_to_function "toggle done", "toggle_done()" %> |
-<%= link_to_function "toggle marker", "toggle_marker_buttons()" %>
+<%= link_to_function "toggle done items", "toggle_done_items()" %> |
+<%= link_to_function "toggle marker buttons", "toggle_marker_buttons()" %>
 
 <ul style="margin:0; padding:0; width:500px;">
   <% @items.each do |item| %>
@@ -31,11 +31,12 @@
       </div>
 
       <div style="clear:both;"></div>
-      <% if item.line_marker %>
-        <div style="border-bottom: 1px #98AFC7 solid"></div>
-      <% end %>
+
 
     </li>
+    <% if item.line_marker %>
+        <div style="border-bottom: 1px #98AFC7 solid"></div>
+      <% end %>
   <% end %>
 </ul>
 
