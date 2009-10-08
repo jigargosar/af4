@@ -16,11 +16,7 @@
             <% form_for(item, :html=>{:style => 'display:inline'}) do |f| %>
               <%= f.hidden_field :completed, :value=>"true" %>
               <%= f.submit 'done' %>
-            <% end %>
-            <% form_for(item, :html=>{:style => 'display:inline'}) do |f| %>
-              <%= f.hidden_field :completed, :value=>"true" %>
-              <%= hidden_field :reschedule, :value=>"true" %>
-              <%= f.submit 'reschedule' %>
+              <%= f.check_box :reschedule %> reschedule
             <% end %>
           </div>
         <% end %>

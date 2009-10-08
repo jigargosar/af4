@@ -45,7 +45,7 @@ class ItemsController < ApplicationController
     @item = Item.new(params[:item])
 
     respond_to do |format|
-      if @item.save       
+      if @item.save
         format.html { redirect_to(items_path) }
         format.xml  { render :xml => @item, :status => :created, :location => @item }
       else
@@ -61,10 +61,12 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
 
     respond_to do |format|
-      if(!params[:reschedule].nil?)
-        @item.clone.save
-      end
       if @item.update_attributes(params[:item])
+        if (@item.reschedule)
+          new = @item.clone;
+          new.completed=false
+          new.save
+        end
         flash[:notice] = 'Item was successfully updated.'
         format.html { redirect_to(items_path) }
         format.xml  { head :ok }
