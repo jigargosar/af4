@@ -59,13 +59,16 @@ class ItemsController < ApplicationController
   # PUT /items/1.xml
   def update
     @item = Item.find(params[:id])
-
+    already_complete = @item.completed
     respond_to do |format|
       if @item.update_attributes(params[:item])
-        if (@item.reschedule)
-          new = @item.clone;
+        just_completed = @item.completed && !already_complete 
+        if (just_completed && @item.reschedule)
+          new = Item.new()
+          new.content=@item.content
           new.completed=false
-          new.save
+          new.reschedule=@item.reschedule
+          new.save!
         end
         flash[:notice] = 'Item was successfully updated.'
         format.html { redirect_to(items_path) }
